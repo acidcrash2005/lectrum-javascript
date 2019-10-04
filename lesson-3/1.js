@@ -12,9 +12,8 @@
 // Решение
 function upperCaseFirst(string) {
     const isString = typeof string === 'string';
-    const isEmpty = string === '';
 
-    if (isString && !isEmpty) {
+    if (isString && string) {
         const startString = string.slice(0, 1);
         const restString = string.slice(1);
         const upperStartString = startString.toUpperCase();

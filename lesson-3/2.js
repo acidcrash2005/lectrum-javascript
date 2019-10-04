@@ -14,9 +14,9 @@
 function checkSpam(source, example) {
     const isSourceString = typeof source === 'string';
     const isExampleString = typeof example === 'string';
-    const isEmpty = source === '' || example === '';
+    const isNotEmpty = Boolean(source) || Boolean(example);
 
-    if (isSourceString && isExampleString && !isEmpty) {
+    if (isSourceString && isExampleString && isNotEmpty) {
         const checkString = source.toLocaleLowerCase();
         const spamWord = example.toLocaleLowerCase();
 

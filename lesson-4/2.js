@@ -19,6 +19,7 @@
 // Решение
 const person = Object.defineProperties({}, {
     rate: {
+        value: null,
         writable: true
     },
     salary: {

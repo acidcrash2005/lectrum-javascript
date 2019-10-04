@@ -17,9 +17,8 @@
 function truncate(string, maxLength) {
     const isString = typeof string === 'string';
     const isNumber = typeof maxLength === 'number';
-    const isEmpty = string === '';
 
-    if (isString && isNumber && !isEmpty) {
+    if (isString && isNumber && string) {
         if (string.length > maxLength && maxLength !== 0) {
             const replacer = '...';
             const newLengthString = maxLength - replacer.length;

@@ -16,10 +16,9 @@ const PRICE = '$120';
 // Решение
 function extractCurrencyValue(source) {
     const isString = typeof source === 'string';
-    const isEmpty = source === '';
     const isNoCurrency = source.length < 2;
 
-    if(isString && !isEmpty && !isNoCurrency){
+    if(isString && source && !isNoCurrency){
         const value = source.slice(1);
 
         return Number(value);

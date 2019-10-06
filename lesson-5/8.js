@@ -17,7 +17,7 @@
 
 // Решение
 const f = function(numbers){
-    if (!numbers.push) {
+    if (typeof numbers !=='object' && !numbers.push) {
         throw new Error('Argument is not an array!')
     }
 
@@ -32,7 +32,6 @@ const f = function(numbers){
     if(numbers.length){
         f(numbers);
     }
-
 };
 
 

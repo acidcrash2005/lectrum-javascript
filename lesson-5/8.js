@@ -17,7 +17,7 @@
 
 // Решение
 const f = function(numbers){
-    if (typeof numbers !=='object' && !numbers.push) {
+    if (!Array.isArray(numbers)) {
         throw new Error('Argument is not an array!')
     }
 

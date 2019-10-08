@@ -16,7 +16,7 @@
  * - Второй аргумент встроенного метода every (thisArg) имплементировать не нужно.
  */
 
-const array = [1, 2, 3, 4, 5, 6];
+const array = [ 1, 2, 3, 4, 5, 6];
 
 // Решение
 const every = function (array, callback) {
@@ -29,12 +29,16 @@ const every = function (array, callback) {
     }
 
     for (let i = 0; i < array.length; i++) {
-        if(callback(array[i], i, array)){
-            return true;
+        if(array[i] === void 0) {
+            continue;
+        }
+
+        if(!callback(array[i], i, array)){
+            return false;
         }
     }
 
-    return false;
+    return true;
 };
 
 const result = every(array, (element, index, arrayRef) => {
@@ -42,6 +46,7 @@ const result = every(array, (element, index, arrayRef) => {
 
     return typeof element === 'number';
 });
+
 
 console.log(result); // true
 

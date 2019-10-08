@@ -16,10 +16,32 @@
  * - В качестве второго аргумента была передана не функция;
  */
 
-const array = [1, 2, 3, 4, 5];
+const array = [0, 1, 2, 3, 4, 5];
 const INITIAL_ACCUMULATOR = 6;
 
 // Решение
+const reduce = function (array, callback, accumulator) {
+    if (!Array.isArray(array)) {
+        throw Error('First argument is not an array!');
+    }
+
+    if (typeof callback !== 'function') {
+        throw Error('Callback is not a function!');
+    }
+
+    let newAccumulator = accumulator || array[0];
+    const start = accumulator ? 0 : 1;
+
+    for (let i = start; i < array.length; i++) {
+        if (array[i] === void 0) {
+            continue;
+        }
+
+        newAccumulator = callback(newAccumulator, array[i], i, array);
+    }
+
+    return newAccumulator;
+};
 
 const result = reduce(
     array,
@@ -28,7 +50,7 @@ const result = reduce(
 
         return accumulator + element;
     },
-    INITIAL_ACCUMULATOR,
+    INITIAL_ACCUMULATOR
 );
 
 console.log(result); // 21

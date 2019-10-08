@@ -19,6 +19,27 @@
 const array = [1, 2, 'Добро пожаловать.', 4, 5, 6];
 
 // Решение
+const some = function (array, callback) {
+    if (!Array.isArray(array)) {
+        throw Error('First argument is not an array!');
+    }
+
+    if (typeof callback !== 'function') {
+        throw Error('Callback is not a function!');
+    }
+
+    for (let i = 0; i < array.length; i++) {
+        if(array[i] === void 0) {
+            continue;
+        }
+
+        if(callback(array[i], i, array)){
+            return true;
+        }
+    }
+
+    return false;
+};
 
 const result = some(array, (element, index, arrayRef) => {
     console.log(`${index}:`, element, arrayRef);

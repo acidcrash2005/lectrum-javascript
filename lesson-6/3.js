@@ -28,15 +28,13 @@ const every = function (array, callback) {
         throw Error('Callback is not a function!');
     }
 
-    let result = [];
-
     for (let i = 0; i < array.length; i++) {
         if(callback(array[i], i, array)){
-            result.push(array[i]);
+            return true;
         }
     }
 
-    return result.length === array.length;
+    return return false;
 };
 
 const result = every(array, (element, index, arrayRef) => {

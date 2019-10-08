@@ -34,7 +34,7 @@ const every = function (array, callback) {
         }
     }
 
-    return return false;
+    return false;
 };
 
 const result = every(array, (element, index, arrayRef) => {

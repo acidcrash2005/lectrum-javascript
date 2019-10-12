@@ -24,11 +24,7 @@ const debugLog = debug('collect');
 
 // Решение
 // Это решение конечно просто жесть! flat прям магия!
-const validateStringArray = require('./validateStringArray');
-
-const printErrorNumber = (value,source) => {
-    throw new Error(`Function is interop because argument "${value}" in [${source}] not a number!`);
-};
+const {validateStringArray, printErrorNumber} = require('./validateStringArray');
 
 const collect = array => {
     if (!Array.isArray(array)) {

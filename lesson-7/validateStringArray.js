@@ -6,4 +6,8 @@ const validateStringArray = (value,source) => {
     }
 };
 
-module.exports = validateStringArray;
+const printErrorNumber = (value,source) => {
+    throw new Error(`Function is interop because argument "${value}" in [${source}] not a number!`);
+};
+
+module.exports = {validateStringArray, printErrorNumber};

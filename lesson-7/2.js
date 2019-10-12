@@ -19,7 +19,7 @@
  */
 
 // Решение
-const validateStringArray = require('./validateStringArray');
+const {validateStringArray} = require('./validateStringArray');
 
 const collect = array => {
     if (!Array.isArray(array)) {

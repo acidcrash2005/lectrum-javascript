@@ -21,20 +21,16 @@ const array = ['Доброе утро!', 'Добрый вечер!', 3, 512, '#'
 // Решение
 const filter = function (array, callback) {
     if (!Array.isArray(array)) {
-        throw Error('First argument is not an array!');
+        throw new Error('First argument is not an array!');
     }
 
     if (typeof callback !== 'function') {
-        throw Error('Callback is not a function!');
+        throw new Error('Callback is not a function!');
     }
 
     let result = [];
 
     for (let i = 0; i < array.length; i++) {
-        if(array[i] === void 0){
-            continue;
-        }
-
         if(callback(array[i], i, array)){
             result.push(array[i]);
         }
@@ -44,7 +40,7 @@ const filter = function (array, callback) {
 };
 
 const filteredArray = filter(array, (element, index, arrayRef) => {
-    // console.log(`${index}:`, element, arrayRef);
+    console.log(`${index}:`, element, arrayRef);
 
     return element === 'Добрый вечер!';
 });

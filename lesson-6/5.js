@@ -20,27 +20,24 @@ const array = [0, 1, 2, 3, 4, 5];
 const INITIAL_ACCUMULATOR = 6;
 
 // Решение
-const reduce = function (array, callback, accumulator) {
+const reduce = function (array, callback, accumulator = null) {
     if (!Array.isArray(array)) {
-        throw Error('First argument is not an array!');
+        throw new Error('First argument is not an array!');
     }
 
     if (typeof callback !== 'function') {
-        throw Error('Callback is not a function!');
+        throw new Error('Callback is not a function!');
     }
 
-    let newAccumulator = accumulator || array[0];
-    const start = accumulator ? 0 : 1;
-
-    for (let i = start; i < array.length; i++) {
-        if (array[i] === void 0) {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] === void 0 ) {
             continue;
         }
 
-        newAccumulator = callback(newAccumulator, array[i], i, array);
+        accumulator = callback(accumulator, array[i], i, array);
     }
 
-    return newAccumulator;
+    return accumulator;
 };
 
 const result = reduce(

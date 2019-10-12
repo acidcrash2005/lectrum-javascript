@@ -21,18 +21,14 @@ const array = [1, 2, 3];
 // Решение
 const forEach = function (array, callback) {
     if(!Array.isArray(array)){
-        throw Error('First argument is not an array!');
+        throw new Error('First argument is not an array!');
     }
 
     if(typeof callback !== 'function'){
-        throw Error('Callback is not a function!');
+        throw new Error('Callback is not a function!');
     }
 
     for (let i = 0; i < array.length; i++){
-        if (array[i] === void 0) {
-            continue;
-        }
-
         callback(array[i],i,array);
     }
 };

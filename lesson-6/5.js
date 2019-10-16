@@ -20,7 +20,7 @@ const array = [0, 1, 2, 3, 4, 5];
 const INITIAL_ACCUMULATOR = 6;
 
 // Решение
-const reduce = function (array, callback, accumulator = null) {
+const reduce = function (array, callback, accumulator = array[0]) {
     if (!Array.isArray(array)) {
         throw new Error('First argument is not an array!');
     }

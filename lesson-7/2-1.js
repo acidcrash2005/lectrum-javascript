@@ -24,7 +24,7 @@ const debugLog = debug('collect');
 
 // Решение
 // Это решение конечно просто жесть! flat прям магия!
-const {validateStringArray, printErrorNumber} = require('./validateStringArray');
+const { printErrorNumber} = require('./validateStringArray');
 
 const collect = array => {
     if (!Array.isArray(array)) {
@@ -35,8 +35,6 @@ const collect = array => {
         if (Array.isArray(value)) {
             return acc.concat(collect(value))
         }
-
-        validateStringArray(value, array);
 
         return acc.concat(value)
     }, []);

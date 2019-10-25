@@ -34,9 +34,7 @@ const bind = (fn, ctx, ...args) => {
         throw new Error('Second argument is not an object!');
     }
 
-    const fnBind = () => {
-      return fn.apply(ctx,args);
-    };
+    const fnBind = () => fn.apply(ctx, args);
 
     return fnBind;
 };

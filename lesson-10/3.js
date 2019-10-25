@@ -40,7 +40,7 @@ const calculateAdvanced = (...functions) => {
             const resultCallback = fn(result.value);
 
             if (resultCallback === void 0) {
-                throw new Error('callback at index 0 did not return any value.')
+                throw new Error(`callback at index ${index} did not return any value.`)
             }
 
             result.value = resultCallback;

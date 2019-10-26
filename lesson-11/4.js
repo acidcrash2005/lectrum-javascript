@@ -27,10 +27,42 @@
  */
 
 // Решение
+const debug = require('debug');
+const debug1 = debug('debug1');
+
+const createLogger = () => {
+    return {
+        callSave: [],
+        call(fn, ...args) {
+
+            if(typeof fn !== 'function'){
+                throw new Error(`First argument "${fn}" should be a function!`);
+            }
+
+            const {callSave} = this;
+
+            const result = {
+                name: fn.name,
+                in: args ? [...args] : [],
+                out: fn(...args)
+            };
+
+            this.callSave = [...callSave, result];
+
+            return fn(...args);
+        },
+        print() {
+            const {callSave} = this;
+
+            return callSave;
+        }
+    }
+};
 
 const returnIdentity = n => n;
 const sum = (a, b) => a + b;
-const returnNothing = () => {};
+const returnNothing = () => {
+};
 
 const logger1 = createLogger();
 console.log(logger1.call(returnIdentity, 1)); // 1

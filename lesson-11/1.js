@@ -22,8 +22,8 @@ const createNumberGenerator = () => {
     let counter = 0;
     let numbers = [];
 
-    const generator = () => {
-        const random = Math.random() * 100;
+    const generator = (min = 1, max = 101) => {
+        const random = Math.random() * (max - min) + min;
         const number = Math.floor(random);
 
         if (!numbers.includes(number)){
@@ -36,13 +36,6 @@ const createNumberGenerator = () => {
 
     return () => {
         if (counter >= 100){
-
-            debug1(numbers.sort((a,b)=>{
-                if (a > b) return 1;
-                if (a < b) return -1;
-                return 0;
-            }));
-
             throw new Error('There are no more numbers available!')
         }
         counter++;

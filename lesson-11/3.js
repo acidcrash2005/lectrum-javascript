@@ -11,7 +11,34 @@
  * - Задачу нужно решить с помощью замыкания.
  */
 
+const debug = require('debug');
+const debug1 = debug('debug1');
+
 // Решение
+const createFibonacciGenerator = () => {
+    const defaultValue = [0, 1];
+
+    return {
+        count: 2,
+        fibonacci: [...defaultValue],
+
+        reset() {
+            this.count = 2;
+            this.fibonacci = [...defaultValue];
+        },
+
+        print() {
+            const {fibonacci, count} = this;
+
+            this.fibonacci[count] = fibonacci[count - 1] + fibonacci[count - 2];
+            const result = fibonacci[count - 1];
+
+            this.count += 1;
+
+            return result
+        }
+    }
+};
 
 const generator1 = createFibonacciGenerator();
 

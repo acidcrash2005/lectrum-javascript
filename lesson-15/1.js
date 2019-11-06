@@ -49,4 +49,4 @@ function sum1(a, b, c, d) {
     console.log(a + b * c + d);
 }
 
-sum1.delay(1000)(5, 2, 5, 6); /* Выведет 7 через 1 секунду. */
+sum1.delay(1000)(5, 2, 5, 6);

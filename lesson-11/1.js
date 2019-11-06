@@ -35,10 +35,9 @@ const createNumberGenerator = () => {
     };
 
     return () => {
-        if (counter >= 100){
+        if (numbers.length >= 100){
             throw new Error('There are no more numbers available!')
         }
-        counter++;
 
         const result = generator();
 

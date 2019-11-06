@@ -16,15 +16,14 @@ const debug1 = debug('debug1');
 
 // Решение
 const createFibonacciGenerator = () => {
-    const defaultValue = [0, 1];
 
     return {
         count: 2,
-        fibonacci: [...defaultValue],
+        fibonacci: [0,1],
 
         reset() {
             this.count = 2;
-            this.fibonacci = [...defaultValue];
+            this.fibonacci = [0,1];
         },
 
         print() {

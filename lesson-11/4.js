@@ -31,15 +31,14 @@ const debug = require('debug');
 const debug1 = debug('debug1');
 
 const createLogger = () => {
+    let callSave = [];
+
     return {
-        callSave: [],
         call(fn, ...args) {
 
             if(typeof fn !== 'function'){
                 throw new Error(`First argument "${fn}" should be a function!`);
             }
-
-            const {callSave} = this;
 
             const result = {
                 name: fn.name,
@@ -47,13 +46,11 @@ const createLogger = () => {
                 out: fn(...args)
             };
 
-            this.callSave = [...callSave, result];
+            callSave = [...callSave, result];
 
             return fn(...args);
         },
         print() {
-            const {callSave} = this;
-
             return callSave;
         }
     }

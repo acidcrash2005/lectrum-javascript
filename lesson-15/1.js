@@ -28,9 +28,11 @@ Function.prototype.delay = function (time = 300) {
         fn(...argsNew);
     }, time);
 
-    return (...args) => {
-        argsNew = args;
-    };
+    if(fn.length){
+        return (...args) => {
+            argsNew = args;
+        };
+    }
 };
 
 function sayHello() {

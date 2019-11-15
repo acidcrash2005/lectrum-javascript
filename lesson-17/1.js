@@ -21,19 +21,23 @@ const postpone = (start, end, delay) => {
         throw new Error('Arguments should be a number');
     }
 
-    const counter = (i) => {
+    let count = 0;
+
+    const setTimer = (i, count) => {
         setTimeout(() => {
             console.log(i);
-        }, delay);
+        }, delay + (count * delay));
     };
 
     if(start < end){
         for (let i = start; i <= end; i++){
-            counter(i);
+            setTimer(i, count);
+            count++;
         }
     }else {
         for (let i = start; i >= end; i--){
-            counter(i);
+            setTimer(i, count);
+            count++;
         }
     }
 };

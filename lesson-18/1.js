@@ -29,47 +29,126 @@
 // Решение
 class DB {
     #id;
+    #counter;
     #tables;
 
     constructor(){
-        this.#id = 0;
+        this.#id = '';
+        this.#counter = 0;
         this.#tables =  new Map();
     }
 
     #idGenerator = () => {
-        this.#id = this.#id + 1;
+        const id = String(new Date().getTime());
+
+        this.#counter = this.#counter + 1;
+        this.#id = `${id}${this.#counter}`;
 
         return this.#id;
     }
 
+    #validate = (record, isRequire) => {
+        if(isRequire){
+            const validObject = ['name','country', 'age', 'salary'];
+
+            validObject.forEach(key => {
+                if (!Object.keys(record).includes(key)){
+                    throw new Error(`Param "${key}" is required!`);
+                }
+            })
+        }
+
+        if(record.name && typeof record.name !== 'string'){
+            throw new Error('Name is required and should be a string!');
+        }
+
+        if(record.country && typeof record.country !== 'string'){
+            throw new Error('Country is required and should be a string!');
+        }
+
+        if(record.age && typeof record.age !== 'number'){
+            throw new Error('Age is required and should be a number!');
+        }
+
+        if(record.salary && typeof record.salary !== 'number'){
+            throw new Error('Salary is required and should be a number!');
+        }
+    }
+
     create(record){
+        this.#validate(record, true);
+
         const id = this.#idGenerator();
 
         this.#tables.set(id, record);
 
-        return id;
+        return String(id);
     }
 
     read(id) {
-        return this.#tables.get(id);
+        if(!id){
+            throw new Error('Request "id" should`t be empty!');
+        }
+
+        if(typeof id !== 'string'){
+            throw new Error('Request "id" should be a "string"!');
+        }
+
+        const table = this.#tables.get(id);
+
+        if(!table){
+            return null;
+        }
+
+        return {id, ...this.#tables.get(id)};
     }
 
     readAll() {
-        return [...this.#tables].map(item => item[1]);
+        if(arguments.length !== 0){
+            throw new Error(`readAll should be call without params, you pas ${[...arguments]}!`);
+        }
+
+        return [...this.#tables].map(item => {
+            return {
+                id: item[0],
+                ...item[1]
+            }
+        });
     }
 
     update(id, data){
+        if(!id){
+            throw new Error('First param ("id", ...) is required!');
+        }
+
+        if(!data){
+            throw new Error('Second param (..., "data") is required!');
+        }
+
+        if(typeof id !== 'string'){
+            throw new Error('Request "id" should a "string"!');
+        }
+
         const item = this.#tables.get(id);
+
+        if(!item){
+            throw new Error('Record don`t exist!');
+        }
+
+        this.#validate(data);
+
         this.#tables.set(id,{...item, ...data});
 
         return id;
     }
 
     delete(id){
-        if(!this.#tables.has(id)){
-            console.error(`Element id=${id} don\`t exist in DB`);
+        if(typeof id !== 'string'){
+            throw new Error('Delete "id" should be a "string"!');
+        }
 
-            return false;
+        if(!this.#tables.has(id)){
+            throw new Error(`Element "${id}" don\`t exist in DB`)
         }
 
         this.#tables.delete(id);
@@ -90,7 +169,7 @@ const person = {
 
 const id = db.create(person);
 
-const id1 =db.create({
+const id1 = db.create({
     name: "Gena", // обязательное поле с типом string
     age: 35, // обязательное поле с типом number
     country: "ua", // обязательное поле с типом string
@@ -102,5 +181,6 @@ const customer1 = db.read(id1);
 const customers = db.readAll(); // массив пользователей
 db.update(id, { age: 22 }); // id
 db.delete(id); // true
+
 
 console.log(db.readAll());

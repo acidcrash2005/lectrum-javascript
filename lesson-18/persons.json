@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Pitter",
+    "age": 21,
+    "country": "ua",
+    "salary": 500
+  },
+  {
+    "name": "Gena",
+    "age": 35,
+    "country": "ua",
+    "salary": 300
+  },
+  {
+    "name": "Karim",
+    "age": 22,
+    "country": "uk",
+    "salary": 200
+  },
+  {
+    "name": "Valik",
+    "age": 24,
+    "country": "pl",
+    "salary": 100
+  }
+]

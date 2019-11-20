@@ -183,4 +183,4 @@ db.update(id, { age: 22 }); // id
 db.delete(id); // true
 
 
-console.log(db.readAll());
+module.exports = DB

@@ -26,8 +26,6 @@
     - Генерировать ошибку если передан в метод `delete` несуществующий или невалидный `id`
 */
 
-const persons = require('./persons');
-
 // Решение
 class DB {
     #id;
@@ -49,8 +47,10 @@ class DB {
         return this.#id;
     }
 
-    #validate = (record, isRequire, validObject = ['name','country', 'age', 'salary']) => {
+    #validate = (record, isRequire) => {
         if(isRequire){
+            const validObject = ['name','country', 'age', 'salary'];
+
             validObject.forEach(key => {
                 if (!Object.keys(record).includes(key)){
                     throw new Error(`Param "${key}" is required!`);

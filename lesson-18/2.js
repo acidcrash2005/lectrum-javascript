@@ -16,93 +16,60 @@ const persons = require('./persons');
 // Решение
 class DB extends CRUD {
 
-    #isMinMax= (props) => {
-        const {query, key, item} = props;
-
-        const min = query[key].min;
-        const max = query[key].max;
-
-        const result = [];
-
-        if(max){
-            result.push(item[key] <= max)
-        }
-
-        if(min){
-            result.push(item[key] >= min)
-        }
-
-        return result;
-    }
-
-    #isEqual = (action) => {
-        switch (action.type) {
-            case 'object':{
-                const {query, item, key} = action.payload;
-
-                return this.#isMinMax({query, item, key})
-            }
-
-            default:{
-                const {query, item, key} = action.payload;
-
-                return [query[key] === item[key]];
-            }
-        }
-    };
 
     find(query) {
-        if(!Object.keys(query).length){
-            throw new Error('Query should`t be an empty!');
-        }
-
         const tables = this.readAll();
 
         const result = tables.filter(item => {
 
-            const coincidences = [];
+            const every = [];
 
             for (const key in query){
-                if(item[key]){
+                if(query[key] && item[key]){
+                    if (typeof query[key] === 'object'){
+                        const min = query[key].min ;
+                        const max = query[key].max ;
 
-                    const isEqual =  this.#isEqual({
-                        type: typeof query[key],
-                        payload: {
-                            query,
-                            item,
-                            key
+                        if(max){
+                            every.push(item[key] <= max)
                         }
-                    });
-
-                    coincidences.push(...isEqual);
+                        if(min){
+                            every.push(item[key] >= min)
+                        }
+                    } else {
+                        if(query[key] === item[key]){
+                            every.push(true);
+                        }else {
+                            every.push(false);
+                        }
+                    }
                 }
             }
 
-            return coincidences.every(coincide => coincide);
+            return every.every(item => item);
         });
 
-        return  result;
+        console.log(result)
     }
 }
 
 
 // Проверка
 const query = {
-    country: "ua",
+    // country: "ua",
     // name: "Gena",
     age: {
-        min: 21,
-        // max: 25,
+        min: 10,
+        max: 25,
     },
-    salary: {
-        min: 300,
-        max: 600
-    }
+    // salary: {
+    //     min: 300,
+    //     max: 600
+    // }
 };
 
 
 const db = new DB();
-
 
 const ids = [];
 
@@ -110,6 +77,5 @@ persons.forEach(item => {
     ids.push(db.create(item));
 });
 
-const customers = db.find(query); // массив пользователей
 
-console.log(customers);
+const customers = db.find(query); // массив пользователей

@@ -34,4 +34,4 @@ const countries = new Countries(url);
     } catch (error) {
         console.log(error);
     }
-})();
+})

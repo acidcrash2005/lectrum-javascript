@@ -15,6 +15,14 @@
 */
 
 // Решение
+const isCustomerVerified = (customer) => new Promise((resolve, reject) => {
+    if (customer.verified){
+        resolve(true);
+    }
+
+    reject('Customer is not verified');
+});
+
 
 // Пример использования
 const personFirst = {
@@ -28,8 +36,8 @@ const personSecond = {
 
 isCustomerVerified(personFirst)
     .then(status => console.log(status)) // true
-    .catch(error => console.log(error))
+    .catch(error => console.log(error));
 
 isCustomerVerified(personSecond)
     .then(status => console.log(status))
-    .catch(error => console.log(error)) // Customer is not verified
+    .catch(error => console.log(error)); // Customer is not verified

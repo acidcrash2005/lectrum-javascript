@@ -15,7 +15,24 @@
 */
 
 // Решение
+const getCustomers = (customers, countries) => new Promise((resolve, reject)=>{
+    const validCustomers = customers.filter(customer => customer.verified);
 
+    const newCustomers = validCustomers.map(customer => {
+        const country = countries.find(country => country.id === customer.id);
+
+        if(!country){
+            reject(`We don't have information about country for this customer: ${customer.name}`)
+        }
+
+        return {
+            ...customer,
+            ...country
+        }
+    });
+
+    resolve(newCustomers);
+});
 
 // Пример использования
 
@@ -28,6 +45,11 @@ const customers = [
     {
         id: 'A2',
         name: 'alex'
+    },
+    {
+        id: 'A3',
+        name: 'Gena',
+        verified: true
     }
 ];
 
@@ -39,6 +61,10 @@ const countries = [
     {
         id: 'A2',
         country: 'poland'
+    },
+    {
+        id: 'A3',
+        country: 'ukraine'
     }
 ];
 

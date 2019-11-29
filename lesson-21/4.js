@@ -24,14 +24,36 @@ const get = require('fetch').fetchUrl;
 const url = 'https://lab.lectrum.io/geo/api/countries';
 
 // Решение
+class Countries {
+    constructor(url) {
+        this.url = url;
+    }
+
+    send(page) {
+        if(typeof page !== 'number'){
+            throw new Error('Send param should be a number!')
+        }
+
+        return new Promise( (resolve, reject) => {
+            get(`${this.url}?size=${page}`, (error, meta, body) => {
+                if (meta.status === 200){
+                    const { data } = JSON.parse(body);
+                    resolve(data)
+                }
+
+                reject(`We have error, status code: ${meta.status}`);
+            });
+        })
+    }
+}
 
 const countries = new Countries(url);
 
-(async() => {
+(async () => {
     try {
         const data = await countries.send(2);
         console.log(data); // массив стран
     } catch (error) {
         console.log(error);
     }
-})
+})();

@@ -1,0 +1,16 @@
+{
+  "name": "JSTransactionModule",
+  "version": "1.0.0",
+  "description": "Lectrum homework cours JavaScript",
+  "main": "./src/index.js",
+  "repository": "https://github.com/acidcrash2005/lectrum-javascript",
+  "author": "Gennadiy Karachentsev",
+  "license": "MIT",
+  "scripts": {
+    "start": "DEBUG=* node ./src/index.js"
+  },
+  "dependencies": {
+    "debug": "^4.1.1",
+    "prettier": "^1.19.1"
+  }
+}

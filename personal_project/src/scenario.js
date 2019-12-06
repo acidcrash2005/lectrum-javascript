@@ -1,6 +1,3 @@
-const debuger = require("debug");
-const log = debuger("logger");
-
 const scenario = [
   {
     index: 1,
@@ -9,10 +6,16 @@ const scenario = [
       description: "Collects pieces of data that required for restore scenario"
     },
     async call(store, logs) {
-      return "1";
+      const data = 10;
+
+      return data;
     },
     async restore(store, logs) {
-      // Логика отката шага
+      const data = store.get(this.index);
+
+      // throw new TypeError("Test rollback, error!");
+
+      return data;
     }
   },
   {
@@ -24,26 +27,34 @@ const scenario = [
     },
     async call(store, logs) {
       const data = store.get(store.size);
-      log(data);
-      return data + 1;
+      const result = data + 1;
+
+      // throw new TypeError("Test, error!");
+
+      return result;
     },
     async restore(store, logs) {
-      // Логика отката шага
+      const data = store.get(this.index);
+
+      return data;
     }
   },
   {
     index: 3,
     meta: {
       title: "Test title",
-      description: "Test derct"
+      description: "Test description"
     },
     async call(store, logs) {
       const data = store.get(store.size);
-      log(data);
-      return data + 1;
+      const result = data + 1;
+
+      return result;
     },
     async restore(store, logs) {
-      // Логика отката шага
+      const data = store.get(this.index);
+
+      return data;
     }
   }
 ];

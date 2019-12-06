@@ -8,9 +8,8 @@ class Transaction {
       description: "string"
     }
   };
-  #initialStore = new Map();
 
-  store = new Map(this.#initialStore);
+  store = new Map();
   logs = [];
   status = null;
 
